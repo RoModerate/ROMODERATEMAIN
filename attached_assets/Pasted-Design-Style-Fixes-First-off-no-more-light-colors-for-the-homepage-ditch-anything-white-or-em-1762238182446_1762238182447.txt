@@ -1,0 +1,96 @@
+Design & Style Fixes
+
+First off, no more light colors for the homepage—ditch anything white or “emo,” and keep your OG pink style, especially for the dashboard buttons and important UI highlights.
+
+The color UI should stay that nice, clean gray—no black and definitely no white, just like the style of your RoModerate icon.
+
+For emoji icons, switch the default white color to your signature pink just like the branding; everything should match RoModerate’s vibe, not look bland or out of place.
+
+RoModerate Page Updates
+
+The RoModerate page should have more going on—not just basic moderator/ban appeal stuff.
+
+Make the page like a split: half focused on moderation tools and community safety, and half on the marketplace, so users see both worlds.
+
+Dashboard bugs: go through and rework anything that’s messy, glitchy, or not matching the main style. Make sure it’s smooth and user-friendly.
+
+Marketplace Dashboard Features & Ideas
+
+The marketplace dashboard should be separate from ban appeals and moderation.
+
+Make sure to show users’ Discord icons and usernames as soon as they log in so it feels personalized.
+
+Marketplace sections need more features:
+
+User profile cards with Discord avatar, role, and verified badge if available.
+
+Let users track their listings, purchases, sales history, and earned credits.
+
+Sort/filter options that actually work for UGC, game passes, plugins, 3D models, etc.
+
+Live notifications for new bids, offers, or comments on users’ items
+
+Seller ratings/reviews for trust and transparency
+
+“Featured sellers” or “Top items” rotating spotlights on the homepage
+
+“Recommended for you” sidebar, powered by item type and user history
+
+Trending and newest sections auto-updating
+
+Escrow service details: explain how it keeps transactions safe for buyers AND sellers.
+
+Marketplace help/tips section for new sellers
+
+In-app support + dispute resolution through Discord integration
+
+Marketplace Listing Features
+
+Listings must let users upload thumbnails, descriptions, multiple item types
+
+Enable image upload for listings: make it work with live previews, size checks, and drag-drop
+
+Set up “Coming soon” for any future features, but also keep the main upload working for now
+
+Add “report listing” and moderation tools to keep marketplace clean
+
+Terms of Service, Policy, & Legal
+
+Create a full Terms of Service for marketplace/ban appeals.
+
+Show the TOS before listing or buying ANY item; users must click “I have read and agree” to continue—no exceptions.
+
+Include Marketplace rules, liability info, user responsibility for uploaded content, prohibited items, how escrow works, user safety policies, and copyright/IP protection.
+
+Privacy Policy section to explain data handling, Discord login, and seller/buyer info privacy.
+
+Give a compliance banner: “By using RoMarket, you acknowledge and accept all marketplace rules—violations may result in account action.”
+
+How Should Marketplace Work?
+
+Sellers post listings (UGC items, passes, plugins, etc.), set prices, upload images, write descriptions.
+
+Buyers log in with Discord, browse categories, and use credits or direct purchases (Stripe, PayPal, etc.)
+
+Escrow system: funds are held until buyer receives the item (or confirms trade in Discord); then, funds are released to the seller.
+
+Ratings/reviews for every transaction, with dispute support via marketplace and Discord mods.
+
+Seller fees or commissions for marketplace upkeep—display these transparently before listing.
+
+Leaderboards or achievements for sellers with the most sales, best reviews, etc.
+
+Seasonal or event-based marketplace themes (Match with RoModerate’s pink style and holiday events).
+
+Integrate notifications for bids, sales, and support tickets.
+
+Extra Design & Experience Ideas
+
+Use more visual cues—badges, icons, animated elements—with your pink as the accent color across the whole platform.
+
+Make sure there’s never a bland or empty area; fill space with guides, latest items, “get started” prompts, or top tips.
+
+Let users customize their dashboard backgrounds or themes—again, pink styles, matching RoModerate branding.
+
+Summary
+Your marketplace needs to match your energetic RoModerate branding—no bland gray/black or “emo” white! Make everything pink/gray themed, focus marketplace features on user profiles, escrow safety, live notifications, seller reviews, and separate moderation/ban appeal stuff. Create full TOS/Policy with a required “agree” button, and build out image uploads, notifications, support, leaderboards, and design improvements—not just plain buy/sell. Keep expanding—every idea above can be built in and iterated on!

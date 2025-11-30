@@ -1,0 +1,21 @@
+For the game profile setup, the game icon and banner both show an error saying they’re too big — that needs to be fixed so it accepts proper sizes automatically, maybe with an auto-resize or compression system.
+
+For the vanity URL, remove the “premium only” restriction for now and make it free. As for the domain — since I don’t currently own romoderate.com, just use the Replit site URL for now. Make it so the displayed link looks short and clean, but when clicked or viewed, it redirects to the full working Replit link (basically a masked or shortened redirect that actually functions properly). Also, show that URL publicly on the user’s page so they can access it directly.
+
+Next, allow users to add and link their external accounts, like their Discord server, YouTube channel, or other connected platforms. Basically, make it possible for users to integrate or display their linked accounts inside the dashboard or on their profile.
+
+Now about the Roblox API key — it doesn’t seem to work when using the /ban command. This needs to be checked and fixed because the command doesn’t seem to properly connect to the Roblox side.
+
+For the ticket setup system, when I try to add a category, it says “category added” but it doesn’t actually appear anywhere. Then, on the ticket panel, it says “You need at least one ticket category before creating panels.” The whole ticket setup flow needs to be reworked so that categories save, display correctly, and can actually be used for creating ticket panels.
+
+In the Reports Settings section, add an area to assign Discord roles that control permissions — for example, who can appeal or cannot appeal. Do the same for Appeal Settings, so it’s all permission-based rather than text-based. Instead of typing roles or IDs manually, make it so users can select roles directly from their Discord server, using a dropdown or selection menu.
+
+For the /user-search command, replace it with a /dashboard button or shortcut so users can quickly open their dashboard instead of having to type that command.
+
+In the Team Members section — when I invite someone, their icon doesn’t show up. I need to be able to see the user’s icon or profile picture after inviting them. Also, all team members should be able to see who’s in the team, including the owner, along with their assigned roles. When a user gets invited, their view keeps switching or glitching, and they shouldn’t be able to see the /onboarding section if they’re just a staff member.
+
+When editing or configuring settings, the Save button doesn’t keep the data — everything resets after a refresh. That needs to be fixed so settings are permanently saved.
+
+For the notification UI, I want it so that when a user uses the /appeal command in the Discord server, a UI notification appears showing their Roblox username and icon, and that info gets sent directly to the Bans section of the dashboard. From there, a moderator should be able to claim or handle the appeal, basically taking ownership of it so that other staff members don’t have to handle the same one.
+
+Finally, when a staff member is invited through the team system, they should not see the server configuration settings for the server they’re assigned to — only the owner or admin should have that access.

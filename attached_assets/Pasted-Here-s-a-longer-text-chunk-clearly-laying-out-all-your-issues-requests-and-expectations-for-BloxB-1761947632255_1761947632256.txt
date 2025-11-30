@@ -1,0 +1,41 @@
+Here’s a longer text chunk, clearly laying out all your issues, requests, and expectations for BloxBetter:
+
+After going through the setup process, I’ve run into multiple issues that need fixing to ensure everything works smoothly and reliably:
+
+Step 3: Channel Configuration
+
+After I complete Step 3, nothing happens—the setup doesn’t seem to do anything or activate any features. Channel configuration appears broken or unfinished and should be fixed to work as intended.
+
+Step 4: Custom Bot Configuration
+
+Entering my bot token does not make my bot go online. This setup step does not work; the bot remains offline. Please fix this so the bot reliably connects after entering the token.
+
+Roblox API Keys
+
+The API key integration is not functioning as expected. Even after entering my Roblox API key and going to the bans section, banning a player in-game fails—the player is not banned and nothing happens. This must be fixed so bans work as designed via the panel.
+
+Branding & Appearance (Game Profile)
+
+There needs to be a clear and usable section for setting up branding and profile appearance for my game page. This should include:
+
+Game Name (required field)
+
+Vanity URL (with info about needing premium for custom links)
+
+Short Description (required, should allow a brief summary)
+
+Appearance (options to personalize with an icon and banner)
+
+Game Icon (upload or change: PNG, JPG, GIF, up to 10MB)
+
+Game Banner (upload/drag: PNG, JPG, GIF, up to 10MB)
+
+All of these branding and profile options must be functional and work properly.
+
+Ticket Categories
+
+The ticket categories feature is broken. When I try to add a category, it claims “submitted,” yet the category is not shown anywhere—the list stays empty and unusable. Categories should appear after submission so support tickets can be organized.
+
+Overall Goal
+
+All features and configurations should not just exist, but work smoothly and reliably. Fix bugs, ensure each component activates/updates when used, and make sure everything is functional and user-friendly.

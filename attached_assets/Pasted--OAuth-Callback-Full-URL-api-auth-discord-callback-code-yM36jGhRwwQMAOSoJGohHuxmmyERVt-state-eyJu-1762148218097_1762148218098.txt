@@ -1,0 +1,18 @@
+[OAuth Callback] Full URL: /api/auth/discord/callback?code=yM36jGhRwwQMAOSoJGohHuxmmyERVt&state=eyJub25jZSI6ImQxYmQ5ODVhYTRhNGFiMTlkNjI4ODRmZTdmM2FmNmU3IiwiaW52aXRlIjpudWxsfQ
+[OAuth Callback] Headers: {"host":"3046ca1a-ece8-4faa-9e95-fe5887881888-00-3167aooscegek.janeway.replit.dev","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7","accept-encoding":"gzip, deflate, br, zstd","accept-language":"en-US,en;q=0.9","referer":"https://discord.com/","sec-ch-ua":"\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","sec-fetch-dest":"document","sec-fetch-mode":"navigate","sec-fetch-site":"cross-site","sec-fetch-user":"?1","upgrade-insecure-requests":"1","x-forwarded-for":"162.157.72.235, 10.83.8.15","x-forwarded-proto":"https","x-replit-user-bio":"","x-replit-user-id":"","x-replit-user-name":"","x-replit-user-profile-image":"","x-replit-user-roles":"","x-replit-user-teams":"","x-replit-user-url":""}
+[OAuth Callback] Decoded state: { nonce: 'd1bd985aa4a4ab19d62884fe7f3af6e7', invite: null }
+[OAuth Callback] State verified successfully
+[OAuth] Using configured DISCORD_REDIRECT_URI: https://3046ca1a-ece8-4faa-9e95-fe5887881888-00-3167aooscegek.janeway.replit.dev/api/auth/discord/callback
+[OAuth] Token exchange attempt: {
+  client_id: '1431894445623607367',
+  redirect_uri: 'https://3046ca1a-ece8-4faa-9e95-fe5887881888-00-3167aooscegek.janeway.replit.dev/api/auth/discord/callback',
+  has_secret: true,
+  has_code: true
+}
+[OAuth] Token exchange failed: {
+  status: 401,
+  statusText: 'Unauthorized',
+  error: '{"error": "invalid_client"}'
+}
+5:36:12 AM [express] GET /api/auth/discord/callback 302 in 113ms
+5:36:14 AM [express] GET /api/auth/me 401 in 0ms :: {"error":"Not authenticated"}

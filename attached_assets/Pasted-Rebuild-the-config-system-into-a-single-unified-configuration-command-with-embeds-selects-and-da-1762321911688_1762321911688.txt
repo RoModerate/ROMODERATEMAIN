@@ -1,0 +1,150 @@
+Rebuild the /config system into a single, unified configuration command with embeds, selects, and database saving.
+
+🧠 Overview
+
+The /config command should be the main configuration center for the bot.
+It must open an interactive embed menu with a dropdown (select menu) that lets server admins configure all bot options in one place.
+
+All configuration data (channels, roles, toggles, categories, etc.) should be saved to the server’s database — not locally. This way, settings remain persistent even after restarts.
+
+Each config item should be editable from the embed via select menus or modals (for text input).
+
+⚙️ Command Name
+
+/config
+
+This command replaces all old /config xyz commands.
+
+🧩 Menu Categories (in dropdown)
+
+Each of these should appear in a select menu within the /config embed:
+
+Reports Settings
+
+New Reports Channel
+
+Ping Role for Reports
+
+Pre-Generated Ban Strings (toggle)
+
+Estimated Time for Reports
+
+Report Logs Channel
+
+Allow Infinite Reports (toggle)
+
+Appeals Settings
+
+Appeal Category
+
+Fallback Appeal Category
+
+Appeal Channel Name Format
+
+Appeal Logs Channel
+
+Appeal Denied Role
+
+Premade Responses (add/list/remove)
+
+Moderation & Logs
+
+Audit Logs Channel
+
+Moderation Logs Channel
+
+Auto Actions Config
+
+Tickets & Support
+
+Ticket Setup Panel
+
+Support Category
+
+Support Channel Format
+
+Game & Roblox
+
+Roblox API Keys
+
+Game Profile Settings
+
+Server Settings
+
+Server Name / Icon Sync
+
+Admin Role
+
+Team Members Category
+
+🧱 How It Works
+
+When a user runs /config, the bot sends an embed titled
+"🛠️ RoModerate Configuration Panel"
+with a dropdown listing all categories above.
+
+When the user selects a category, the bot edits the embed to show all relevant settings with:
+
+Buttons for “Set Channel”, “Set Role”, “Toggle On/Off”, or “Edit Text”
+
+Modal popups for input (like entering channel name formats or times)
+
+Once a setting is changed, it should:
+
+Update the server’s database entry (MongoDB, Prisma, etc.)
+
+Send a small confirmation (✅ “Setting saved successfully!”)
+
+The config should pull default data from:
+
+Discord server categories such as:
+
+Moderation
+
+Appeals Settings
+
+Reports Settings
+
+Ticket Setup
+
+Configuration
+
+Server Settings
+
+and automatically populate dropdowns with valid channel/role IDs.
+
+🧩 Data Saving Example
+
+Each server in the database should store configuration like:
+
+{
+  "serverId": "1234567890",
+  "reportSettings": {
+    "newReportsChannel": "1212121212",
+    "pingRole": "1313131313",
+    "banStringsEnabled": true,
+    "estimatedTime": "15m",
+    "reportLogs": "1414141414",
+    "allowInfiniteReports": false
+  },
+  "appealSettings": {
+    "category": "1515151515",
+    "fallbackCategory": "1616161616",
+    "channelNameFormat": "appeal-{username}",
+    "appealLogs": "1717171717",
+    "deniedRole": "1818181818",
+    "premadeResponses": ["Exploiting confirmed", "Insufficient evidence"]
+  },
+  "moderationLogs": "1919191919",
+  "auditLogs": "2020202020"
+}
+
+⚡ Other Fixes (also include in update)
+
+Fix “Failed to search player. Please try again.” in /user-search
+
+Fix Create Panel button (currently does nothing)
+
+Ensure database initializes properly with DATABASE_URL (Replit Secrets)
+
+Prevent auto logout when refreshing the web dashboard

@@ -1,0 +1,57 @@
+Enumerating objects: 506, done.
+Counting objects: 100% (403/403), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (362/362), done.
+Writing objects: 100% (362/362), 171.05 KiB | 1.55 MiB/s, done.
+Total 362 (delta 73), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (73/73), completed with 13 local objects.
+remote: error: GH013: Repository rule violations found for refs/heads/main.
+remote: 
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote: 
+remote:     - Push cannot contain secrets
+remote: 
+remote:     
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:     
+remote:     
+remote:       —— Hugging Face User Access Token ————————————————————
+remote:        locations:
+remote:          - commit: f4d2d1d20d0fe0294f84d435a18548cca0e16da1
+remote:            path: .replit:107
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/RoModerate/ROMODERATEMAIN/security/secret-scanning/unblock-secret/36BXMM4n5AZLFzEOpwyTbhejjaz
+remote:     
+remote: 
+remote: 
+remote: error: GH013: Repository rule violations found for refs/heads/replit-agent.
+remote: 
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote: 
+remote:     - Push cannot contain secrets
+remote: 
+remote:     
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:     
+remote:     
+remote:       —— Hugging Face User Access Token ————————————————————
+remote:        locations:
+remote:          - commit: f4d2d1d20d0fe0294f84d435a18548cca0e16da1
+remote:            path: .replit:107
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/RoModerate/ROMODERATEMAIN/security/secret-scanning/unblock-secret/36BXMM4n5AZLFzEOpwyTbhejjaz
+remote:     
+remote: 
+remote: 
+To https://github.com/RoModerate/ROMODERATEMAIN.git
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+ ! [remote rejected] replit-agent -> replit-agent (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/RoModerate/ROMODERATEMAIN.git'

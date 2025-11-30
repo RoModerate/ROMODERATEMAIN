@@ -1,0 +1,86 @@
+Dashboard Configuration & Features
+Step 4 - Discord Bot Token Issue
+When entering the bot token, it does not go online. However, when entering the token in the Server Settings, it works. Please fix this so that entering the token in the main interface also works. Additionally, fix the Server Insights section so it functions properly. Rename it to Shift Panel or a similar name for moderators to start their shift from there.
+
+Activity Logs & Configuration
+Move the activity logs to the Configuration section. Remove the /reports button and the related area. Within the Moderator section, add a /dashboard button.
+
+Team Member Display
+When inviting team members, their username and icon should be visible to everyone. Show a dot on their icon if they're online, and indicate if they're on shift or not.
+
+Commands & UI Design
+Make the commands well-designed using clean, professional Discord Markdown. Avoid using ugly emojis. I will provide well-made emojis later. Embeds should be used when necessary, such as when reporting, and should include the user's Roblox icon.
+
+Ticket Panel
+Fix the Ticket Panel so it works with channels and includes the following general options:
+
+Command Prefix: $
+Dashboard Roles: @everyone, Blox, reports, sRo, Moderate, Ticket Tool
+Blacklist Roles: Any role assigned here will be unable to use commands or reactions.
+Global Ticket Limit: Set a limit for open tickets across all panels.
+Create Panel
+×
+A panel is where users go to create tickets. Panels are highly customizable and allow for flexible ticket systems. Create a panel and send it to a channel to get started.
+
+Panel Name
+New Panel (1)
+
+General Ticket Options
+
+General: Support team and other general items
+Category: Options for closed/opened tickets
+Ticket: General ticket options
+Moderator: Moderator message options
+Permissions: Permission options
+Buttons: Quick access to all buttons
+Messages: Quick access to all messages
+Escalate: Escalation options
+Panel Settings
+
+Panel: Options for the message used to create tickets
+Command Style: Options for creating tickets using commands
+Dropdown Style: Options for creating tickets using a select menu
+Thread Style: Thread-style tickets, instead of channels
+Forms: Form options
+Advanced Settings
+
+Transcript: Options for saving transcripts
+Logging: Options for server logging
+Automation: Automation options
+Limits: Limits and scheduling
+Claiming: Claiming options
+Integrations: External bot integrations
+Support Team Roles
+@everyone, Blox, reports, sRo, Moderate, Ticket Tool
+
+Category Created/Opened
+
+Salons textuels
+Salons vocaux
+Panel Message
+Ticket Message
+Include a Dashboard History and Command Configs.
+
+Automation
+
+Re-Open: For opening closed tickets
+Close: For closing open tickets
+Close Request: For sending the close request message on command
+Delete: Bypass closing and delete tickets
+Rename: For renaming tickets
+Transcript: Create a transcript of the last 1000 messages in the channel
+Add: Add a user to a ticket
+Remove: Remove a user from a ticket
+Claim Ticket: Allows support team to claim tickets (Premium Only)
+New/Ticket: For creating command-style tickets
+Vote: For redeeming and linking Ticket Tool votes
+Setup (Coming Soon): Basic config editor and first-time setup
+Premium: Check your server's premium status
+Ping: Basic ping command
+PermissionLevel: For checking your permissions with Ticket Tool
+Panel: For creating the ticket panel
+Id: Utility for getting role/channel IDs
+Invite: Invite Ticket Tool
+Help: The help command
+Debug: For debugging issues with Ticket Tool
+Escalate: For escalating tickets to another panel

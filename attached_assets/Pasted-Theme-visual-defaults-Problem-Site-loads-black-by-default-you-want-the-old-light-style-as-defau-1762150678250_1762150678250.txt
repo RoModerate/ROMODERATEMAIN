@@ -1,0 +1,265 @@
+Theme / visual defaults
+
+Problem: Site loads black by default, you want the old light style as default, with a toggle for dark later.
+What to do:
+
+Set Light as the default theme on first paint. Detect user preference via prefers-color-scheme but fall back to your saved user setting. If no setting, default to Light.
+
+Add a theme toggle in the header/profile settings: Light / Dark / System. Remember to persist selection (cookie or DB).
+
+Make sure CSS variables exist for both themes (--bg, --text, --muted, --card-bg) and all components reference them.
+
+Acceptance criteria
+
+New session (no saved pref) opens in Light theme.
+
+Toggling persists across reloads.
+
+No elements should be invisible (e.g., black text on black background).
+
+2) Homepage & “marketplace” visibility + bottom area clean-up
+
+Problem: Homepage bottom area is visually cluttered (e.g., “Built with Security as a Foundation”) and the marketplace is not prominent or functional.
+What to do (UI & UX):
+
+Hero: Add a top hero that clearly states the site’s purpose + a primary CTA button: Browse Marketplace (visible on page load).
+
+Marketplace teaser: Below hero, add a Market Preview section: featured items carousel, top categories, and “Create Listing” CTA (only for verified sellers).
+
+Info strip: Move “Built with Security as a Foundation” into a compact footer strip with a short 1-line blurb + link to security docs (not as a big block).
+
+Bottom area: simplify — three columns: About / Marketplace / Support. Remove heavy promotional language and large icons that crowd the space.
+
+Acceptance criteria
+
+Marketplace CTA is visible within first viewport on desktop.
+
+Footer shows small security text + links; bottom area no longer overflows or looks busy.
+
+3) Marketplace — full rework (function + anti-scam)
+
+You said marketplace must be #1 feature, worldwide, no limited items for now, and secure against scamming. Here’s a robust design.
+
+Core concept
+
+Listings — sellers create listings (title, description, category, images, proving material, price, region/currency). Each listing gets a unique listingID.
+
+Escrow system — all transactions go through an escrow managed by the backend. Buyer pays site; funds are held until buyer confirms item received or until an auto-release period ends.
+
+Verification — sellers must complete a KYC-lite or verification flow (email + Discord + game dev account proof) before creating listings.
+
+No “limited” sales — restrict categories to items allowed by terms; explicitly block “limited” or banned categories by content tag or keyword rules.
+
+Developer storefronts — special seller type for developers with catalog management and dev-only analytics.
+
+Reputation & disputes — rating system + dispute flow with moderators and evidence uploader (images, clips). Disputes open a case with escrow freeze.
+
+Anti-scam features (must-have)
+
+Escrow holds — buyer payments go into escrow until confirmation or timeout (e.g., 72 hours).
+
+Proof required for high-value listings — require a “proof of ownership” upload for items over threshold.
+
+Transaction logs & audit trail — immutable server-side logs for every trade (who initiated, timestamps, IPs).
+
+Minimum seller verification — new sellers limited by daily sales count/volume until they pass verification.
+
+In-platform messaging only — require initial communications through in-platform messaging; discourage or block offsite payment instructions in descriptions (auto-scan descriptions for banned patterns).
+
+Automated scam detection — heuristics for suspicious behavior (rapid multiple listings, identical images, repeated complaints).
+
+Fee & refund policy — clear fee schedule and refund timelines.
+
+UX for marketplace
+
+Category filters, price slider, region selector, sort (relevance/new/price), pagination/infinite scroll.
+
+Item detail page: images, seller badge, last sold info, escrow terms, “Buy” button starts escrow flow with clear steps.
+
+Seller store page: all seller listings, ratings, verification badge.
+
+Acceptance criteria
+
+Buyers can list, buy, and complete a purchase via escrow.
+
+Admin can review disputes and release/return escrowed funds.
+
+Sellers cannot list limited items or banned categories.
+
+4) Onboarding — “Select Your Server” & bot creation issues
+
+Problems: Selector shows server name but when selected it’s black (invisible), and adding bot with token fails due to DB error.
+What to do (UI fixes + backend checks):
+
+Frontend select styling
+
+Ensure selected <option> and the select-control’s selected item have visible text color for both themes:
+
+select, .select-control { color: var(--text); background: var(--card-bg); }
+select option { color: var(--text); }
+
+
+If you use a custom select component, ensure .selected class applies color: var(--text).
+
+Bot creation flow & DB error
+
+Root cause: Error: [Database] Database not initialized. DATABASE_URL environment variable must be configured. — your server cannot connect to the DB.
+
+Fixes:
+
+Confirm DATABASE_URL is set in Replit Secrets (or .env) and accessible to the server process.
+
+Add a start-time check that fails gracefully and logs helpful guidance if the env var is missing.
+
+Improve error message returned to frontend (friendly text + link to setup docs).
+
+Ensure DB init runs before any endpoint that writes to DB; add a middleware guard that returns 503 if DB not initialized.
+
+Example Node/TS check (server start):
+
+// db.ts
+export function initDB() {
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    console.error('[Database] DATABASE_URL missing. Set it in environment variables.');
+    process.exit(1); // or throw and have process manager restart
+  }
+  // initialize DB client...
+}
+
+
+Bot token offline troubleshooting
+
+Verify token is written to DB only after DB connection is confirmed.
+
+After storing token, attempt to login Discord client and return a deterministic error if login fails (e.g. invalid token).
+
+Log and surface permission errors (e.g., bot missing GUILD_* scopes).
+
+Ensure OAuth install flow includes bot scope and required permissions; confirm the bot is invited to the server with proper permissions or the user is owner/co-owner.
+
+Acceptance criteria
+
+Selecting server shows readable name in both themes.
+
+Bot creation returns clear errors when DB missing; when DB present, token is stored and bot moves online (if token valid) or returns actionable error.
+
+5) Specific UI placements & small fixes
+
+Move these to bottom of configuration page:
+
+Bot Commands
+
+Help & FAQ
+So they don’t clutter the main configuration flow; put them in a collapsible section labeled “Support & Commands”.
+
+Ticket panel / Add Ticket Category bug
+
+Ensure panels are created via the bot account (or webhook) and not client-side only.
+
+If using discord components, confirm bot has Manage Channels, Send Messages, Embed Links, and Manage Messages permissions.
+
+Add server-side validation and API returns for panel creation success/failure with full error payload.
+
+Moderation area — User Search
+
+Error message: Failed to search player. Please try again. — add detailed error logs and surface specific messages:
+
+If external API failure: External API unavailable (503) — try later.
+
+If malformed query: Invalid user ID format.
+
+Implement server-side retries/backoff for flaky external lookups and caching for repeated queries.
+
+Invitation creation permissions
+
+Restrict invitation creation endpoint to roles: owner and co-owner. Enforce server-side only — don't depend on client checks.
+
+Acceptance criteria
+
+Ticket panel creation works and posts an actionable message (embed + buttons).
+
+User search provides useful error messages and works for valid queries.
+
+Only owner/co-owner can create invite links; other roles see disabled UI with tooltip.
+
+6) Crashes & stability
+
+Symptoms: website keeps crashing a lot.
+Immediate fixes:
+
+Add process monitoring (PM2 or Replit supervisor) + graceful restarts.
+
+Set up error tracking (Sentry) for runtime exceptions.
+
+Add health-check endpoints /health and DB connection pool checks.
+
+Limit memory usage: set connection pool size, close unused DB connections.
+
+Use pagination for heavy queries; prevent full table SELECT * reads on UI load.
+
+Performance checklist
+
+Connection pool limits
+
+Query optimizations & indexes
+
+Use Redis/Cache for heavily-read endpoints
+
+Frontend: lazy-load big resources (images) and defer non-critical JS
+
+Put large image assets on CDN or Replit static hosting
+
+Acceptance criteria
+
+No immediate crashes during normal usage after fixes; meaningful error logs collected.
+
+7) Prioritized implementation plan (quick roadmap)
+
+Critical (blockers): Fix DATABASE_URL check, ensure DB initializes, handle missing env gracefully, fix bot token save/login flow. (High)
+
+UI bugfixes: theme default Light, select color fix, move Help & Bot Commands to bottom. (High)
+
+Ticket & moderation fixes: panel creation, user search error handling, invite permissions. (Medium)
+
+Marketplace MVP: listing flow + escrow + basic verification + storefronts + filters. (High)
+
+Stability & monitoring: Sentry, health checks, connection pool tuning. (High)
+
+Polish: marketplace search ranking, developer analytics, UX microcopy. (Low)
+
+8) Example microcopy & UI text
+
+Hero CTA: Browse Marketplace — “Buy, sell, and trade game assets securely.”
+
+Marketplace empty state: “No items here yet — be the first to post a listing.” CTA: Create Listing
+
+Bot creation error: “Could not create bot: database connection missing. Ask an admin to configure DATABASE_URL in project secrets.”
+
+9) Short checklist you can paste to Replit AI or devs
+
+ Set default theme to Light & add theme toggle.
+
+ Fix select text color for selected server (both themes).
+
+ Add DB init guard; require DATABASE_URL in secrets; improve errors.
+
+ Ensure bot token login is attempted only after DB initialized; surface token/login errors.
+
+ Move Bot Commands and Help & FAQ to bottom of configuration page in a collapsible support card.
+
+ Fix ticket panel creation (bot/webhook sends embed + button).
+
+ Restrict invite creation to owner & co-owner (server-side).
+
+ Rebuild marketplace with escrow, verification, storefronts, and anti-scam checks.
+
+ Add Sentry/health check & tune DB pools to stop crashes.
+
+If you want, I can also:
+
+turn this into a GitHub-style issue list with checkboxes and suggested PR titles, OR
+
+produce example API contract endpoints for the marketplace (JSON schema for listing/create/buy/dispute), OR
+
+write the small Node/TypeScript DATABASE_URL validation + friendly error middleware you can drop in.

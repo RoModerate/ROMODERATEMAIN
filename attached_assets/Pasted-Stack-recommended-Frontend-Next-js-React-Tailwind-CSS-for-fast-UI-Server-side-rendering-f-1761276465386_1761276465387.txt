@@ -1,0 +1,227 @@
+Stack (recommended):
+
+Frontend: Next.js (React) + Tailwind CSS for fast UI. (Server-side rendering for pages like reports.)
+
+Backend: Node.js + Express or Next.js API routes. Use Prisma + Postgres for DB.
+
+Realtime: Socket.IO (or Pusher) for live updates on dashboard.
+
+Auth: NextAuth (Discord OAuth2) for user accounts and OAuth2 flows.
+
+Hosting: Replit for dev; production-ready: Vercel (frontend) + Railway/Heroku for backend or single fullstack on Vercel with external Postgres.
+
+Integrations:
+
+Bloxlink API integration for Roblox/Discord cross-checks (use official endpoints/keys).
+
+Discord: use OAuth2 bot invite (client ID + permissions) or let users link their own bot by inviting it or registering it via a webhook — never accept Discord user tokens.
+
+Security & privacy:
+
+Use HTTPS, store secrets in environment variables, and never log tokens.
+
+If users host their own bot, require them to run the bot themselves and have it register with the dashboard via a signed webhook (bot posts bot_id + HMAC).
+
+UI / Theme:
+
+Purple-ish theme. Example color palette: #6B21A8 (deep purple), #8B5CF6, #A78BFA, accent #7C3AED, neutral #111827.
+
+Use the icon you provided in the header and favicon: https://i.postimg.cc/Jztj77G5/image-removebg-preview-3.png.
+
+Core features:
+
+Landing page with "Connect with Discord" and explainers.
+
+Dashboard with server selection, report generator, analytics (requests, success rates).
+
+“Add Bot” flow: (a) Invite official bot (if you provide one) via OAuth2, or (b) register user’s bot via webhook token exchange (server-to-server).
+
+BloxLink tools: search users, mass lookup, link verification, moderation helpers.
+
+Settings: customize colors, widgets, webhook endpoints, rate limits, permissions.
+
+Logs + audit trail per server.
+
+Acceptance criteria / deliverables to ask Replit AI for:
+
+Working frontend pages (landing, login via Discord OAuth, dashboard, settings).
+
+Working backend API (user auth, server list, Bloxlink integration, bot registration webhook).
+
+Database schema & migrations.
+
+README with env vars and deploy steps.
+
+Simple test user and test workflow documented.
+
+Ready-to-paste prompt for Replit AI
+
+Use the block below — paste it exactly into Replit AI. It explains everything the assistant should build.
+
+Build a production-ready web app modeled after blox.report. I want a fully working prototype with the following requirements. Use Next.js + Tailwind CSS for the frontend and a Node/Next backend (Next API routes or Express) with PostgreSQL + Prisma for database ORM. Provide code, migration files, and a README with deploy steps.
+
+Project goals
+
+A polished, purple-themed SaaS-style dashboard where users can connect Discord and use Bloxlink features.
+
+Use my icon for branding: https://i.postimg.cc/Jztj77G5/image-removebg-preview-3.png
+
+Security rule: Do NOT ask users for Discord user tokens. Support safe bot connectivity using Discord OAuth2 or an explicit bot-registration webhook (server-to-server). Explain both workflows in the README.
+
+Tech stack (must)
+
+Frontend: Next.js (React) + Tailwind CSS
+
+Backend: Next.js API routes or Express
+
+DB: PostgreSQL + Prisma
+
+Realtime: Socket.IO (for live dashboard updates)
+
+Auth: NextAuth with Discord OAuth2 (for user login) plus JWT for API calls
+
+Storage: use local file storage for uploads in dev, but code should be compatible with S3 for production
+
+Environment variables: DATABASE_URL, NEXTAUTH_URL, NEXTAUTH_SECRET, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, BLOXLINK_API_KEY, JWT_SECRET
+
+UX / pages
+
+Landing page
+
+Clear value proposition and CTA: “Connect with Discord”.
+
+Show the purple theme and project icon.
+
+Login/Connect
+
+"Sign in with Discord" using OAuth2 (NextAuth).
+
+Dashboard (after login)
+
+Server selector (list servers the user can manage via Discord OAuth scopes).
+
+Report generator UI (search Roblox users via Bloxlink, generate a shareable report).
+
+Widgets: server stats, recent activity, queued requests.
+
+Bot management panel:
+
+Option A: Invite an official bot via an OAuth2 invite link (if we provide a bot).
+
+Option B (user-owned bot): allow users to register their own bot by having their bot call an authenticated webhook (bot sends bot_id and an HMAC or secret it stores). This must not involve sharing Discord user tokens.
+
+Customization panel: let user change accent color (select from provided purple palette) and toggle features.
+
+Admin / Logs page
+
+Per-server logs, request history, and simple analytics.
+
+Settings
+
+API keys, webhooks, rate limit configuration, theme settings.
+
+Bloxlink integration
+
+Implement core integration to call Bloxlink endpoints (assume BLOXLINK_API_KEY env var).
+
+Provide endpoints in the backend:
+
+GET /api/bloxlink/user/:robloxIdOrName → returns Bloxlink data
+
+POST /api/bloxlink/batch → batch lookup of up to X users (with queued handling)
+
+Create a client-side component to display Bloxlink results in a readable report (avatar, username, links to Roblox profile, any moderation flags the API provides).
+
+Bot connectivity — explicit and safe
+
+Do NOT accept or store anyone’s Discord user token.
+
+Support two safe ways:
+
+OAuth2 Invite (recommended): Provide a generated invite link for a bot client ID with required permissions. Explain how site owners can deploy a bot and set BOT_TOKEN in their own hosting. Provide code that demonstrates a server bot that uses Discord.js and subscribes to webhooks from the dashboard.
+
+Bot registration webhook (for user-owned bots): User-hosted bot can POST /api/register-bot with bot_id and a pre-shared registration_secret. The backend stores a hashed secret and a callback URL. The bot must prove ownership (HMAC signature on payload). Document how to run the bot locally and register it — all without ever submitting a Discord user token through the site.
+
+Document the tradeoffs and steps in README.
+
+Design / theme
+
+Purple palette (use these hexs): #6B21A8, #8B5CF6, #A78BFA, accent #7C3AED, background #0F172A, text #EDE9FE
+
+Use the provided icon throughout (favicon, header, login).
+
+Create a responsive dashboard that looks great on mobile and desktop.
+
+Database models (minimum)
+
+User (id, discordId, displayName, avatar, createdAt)
+
+Server (id, discordServerId, name, ownerId, settings JSON, createdAt)
+
+BotRegistration (id, botId, ownerUserId, webhookUrl, secretHash, createdAt)
+
+BloxRequests (id, userId, serverId, query, resultSummary, createdAt)
+
+ApiKeys (id, serverId, keyHash, scopes, createdAt)
+
+APIs & Rate limiting
+
+Implement request throttling per-user and per-server (simple token bucket or express-rate-limit).
+
+Provide a small API key generation flow for server owners to use server-level API access.
+
+Devops & README
+
+README must include:
+
+Full env var list and what they do.
+
+How to register a Discord app and set OAuth2 redirect URIs.
+
+How to obtain a BLOXLINK_API_KEY (placeholder instructions).
+
+How to register a bot and the recommended invite URL.
+
+How to run migrations and start the app locally (dev).
+
+How to deploy (Vercel + external Postgres example).
+
+Security checklist (never log tokens, rotate secrets, HTTPS).
+
+Deliverables
+
+Fully working repo with code for frontend & backend.
+
+Prisma schema + migration.
+
+Example .env.example file.
+
+README documenting flows (especially bot registration webhook and OAuth2).
+
+Minimal tests to prove endpoints work (e.g., one test for Bloxlink proxy endpoint).
+
+Simple seed script adding a demo user and demo server for quick testing.
+
+Extra (nice-to-have)
+
+Dark/light toggle, but default dark with purple accents.
+
+Invite/shareable report links (public, expiring).
+
+Export CSV for request logs.
+
+Small analytics chart on dashboard (request volume over time).
+
+Option to set custom domain per server.
+
+Acceptance criteria (what I will test)
+
+I can log in with Discord OAuth2.
+
+I can view my servers and open a dashboard for a server I own.
+
+I can query the Bloxlink endpoint and see results rendered as a report.
+
+I can register a user-hosted bot via the secure webhook method and it appears in the bot panel.
+
+Code includes README and runs locally following steps.

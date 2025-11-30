@@ -1,0 +1,137 @@
+There are many issues across onboarding, user search, linking, ticketing, webhooks, Game Profile links, and the admin/changelog area. Please fix these now with the behaviors described below. After each fix, auto-sync the front-end and back-end so the site and bot reflect results immediately.
+
+PRIORITY FIXES (do these first)
+1) Onboarding persistence
+- Bug: After completing /onboarding, the site forces the user to redo it on refresh.
+- Expected: Once a user completes onboarding, they should not be forced to redo it again unless they explicitly reset it.
+- Fix:
+  - Server: Add `onboardingCompleted: boolean` to user record in DB.
+  - When user finishes onboarding, set `user.onboardingCompleted = true` and persist.
+  - Auth/session: Use server-side session or JWT with an httpOnly cookie so auth persists across page refreshes.
+  - Frontend: Check the user record on page load; if `onboardingCompleted === true`, route them to dashboard, not onboarding.
+
+2) /user-search: avatar and accuracy
+- Bugs:
+  - Search result icon is purple / not the user's Roblox icon.
+  - Info shows "No Active Bans / 0 Total Bans / 0 Notes" even if there are records — must be accurate.
+- Expected:
+  - Use Roblox headshot/avatar for the user icon (never random placeholder).
+  - Display real ban counts/notes pulled from DB.
+- Fix:
+  - Use Roblox Thumbnails API (or Noblox.js) to fetch the avatar/headshot URL from the user's Roblox ID; fall back to a default only if Roblox request fails.
+  - Ensure user-search queries the DB for bans/notes by `robloxId` (or linked ID), then render counts exactly.
+  - Remove any placeholder or static purple icon logic.
+
+3) /linkey invalid key issue
+- Bug: Even with the correct key entered, `/linkey` responds: "❌ | Invalid Link Key".
+- Expected:
+  - Key validation must accept the exact generated key (case-sensitive), trim whitespace, and respect TTL (24h).
+- Fix:
+  - Server: When generating link keys, store `{ key, serverId, createdAt }` in DB.
+  - Validation: when `/linkkey <key>` runs, query DB for key exactly (no case conversion), check `now - createdAt <= 24h`.
+  - If key used, mark server `linked = true` and delete/expire the key.
+  - Provide precise error messages: "Key expired", "Key not found", "Key already used", "Key must be copied exactly".
+
+4) Ban Appeal Webhook not firing
+- Bug: Ban Appeal webhook does nothing.
+- Expected:
+  - Webhook should POST a standardized payload when an appeal is created or its status changes; return success or log errors.
+- Fix:
+  - Check saved webhook URL (validate presence, correct format).
+  - Implement server-side `try/catch` around webhook call and retry once on network error. Log failures to admin logs with error details.
+  - Add test button in admin panel for webhook test-ping.
+  - Make the webhook payload include: `appealId, userId, userRobloxId, reason, status, timestamp`.
+
+5) Game Profile & Branding link error
+- Bug: Clicking the Game Profile link returns `{"error":"Vanity URL not found"}`.
+- Expected:
+  - If a vanity URL or profile doesn’t exist, show a friendly “Not found” page; if it exists, open the profile.
+- Fix:
+  - Validate the vanity name before rendering link. If using Roblox group vanity or user vanity, call Roblox API to check existence. If API returns 404, show an in-app message “Vanity URL not found” rather than raw JSON.
+  - Add graceful error handling and a link back to the dashboard.
+
+6) Ticket System / Ticket Setup broken
+- Bug: Ticket setup doesn't work; a lot of console errors.
+- Expected:
+  - Ticket creation, panel buttons, and ticket category assignment must work without JS console errors.
+- Fix:
+  - Check front-end console stack traces—wrap all API calls in try/catch and show user-friendly errors.
+  - Verify the backend endpoints exist and return proper JSON schema.
+  - Ensure socket or polling connections used for ticket updates are stable and reconnect on network loss.
+  - Rework ticket UI to:
+    - Validate input before posting
+    - Provide clear success/error messages
+    - Ensure category/channel IDs are valid and present in server DB before creating channels
+
+7) Create Panel / Ticket area major rework
+- Req: Rework the entire Ticket Area — not functioning well.
+- Changes:
+  - Rebuild ticket creation flow: select type → auto-create channel under chosen category → log message to ticket logs channel.
+  - UI should show ticket status, assigned staff, time opened.
+  - Add debuggable logs on backend and admin panel.
+
+8) Changelog Manager visibility
+- Bug: Changelog Manager area is public or shown for non-owner.
+- Expected:
+  - Changelog Manager should only be visible/editable by the site owner.
+- Fix:
+  - Add role-check in front-end and server endpoint: `if (user.id !== OWNER_ID) 403`.
+  - Remove public links/UI for changelog unless session user is owner.
+
+UI / UX TWEAKS (small but important)
+9) Moderation Action / Select Player indicator
+- Req: When “Select Player for Moderation Action” is active, show a red dot next to the selected item so staff knows where they are.
+- Fix: Add a small red circular badge component to the selected list item; persist selection in local state so it stays on refresh within a session.
+
+10) Ban Management UI
+- Req: Remove current block placeholder. Replace it with the user’s Roblox avatar and show a ban icon near it.
+- Fix:
+  - Fetch avatar via Roblox Thumbnails API and render it.
+  - Put a small ban icon (emoji or svg) near the avatar or as overlay.
+
+11) Link errors & console logs
+- Req: Remove raw JSON responses from UI. Always show formatted messages and do not expose raw error objects.
+- Fix: Centralize error handling middleware on backend and show friendly UI notification with an error id for admin logs.
+
+SECURITY & AUTH
+12) Session persistence & re-login issue
+- Bug: Refresh forces re-login on dashboard.
+- Fix:
+  - Use secure httpOnly cookies for sessions or implement JWT + refresh token flow.
+  - On page load, call `/api/auth/me` to check and refresh session; route user accordingly.
+
+13) Permissions & roles
+- Ensure all admin/moderator endpoints check role/permission server-side, not only in the front-end.
+
+LOGGING & DEBUGGING
+14) Add an “Admin Logs” area that records:
+- Failed webhook attempts
+- Ticket creation errors
+- Onboarding errors
+- Linkkey generation/validation failures
+
+WHAT YOU DIDN’T HAVE TIME TO REWORK (items to prioritize after fixes)
+- Automated image moderation (AI scanning for NSFW) — currently pending (manual mod remains).
+- Robux escrow automation/Roblox payouts — this is semi-automatable but needs safe manual review policy (Roblox limitations).
+- Real-time webhook reliability & queue (e.g., background job queue for retries on failure).
+- Full test suite / e2e tests for ticket flows & link key flows.
+
+TEST CASES / QA
+- Onboarding:
+  - Complete onboarding, refresh page, verify not redirected to onboarding.
+- /linkey:
+  - Generate key → wait 23 hours → use key → success; Generate key → wait 25 hours → show expired message.
+- user-search:
+  - For existing banned user: show actual ban counts.
+  - Avatar should match Roblox headshot.
+- Ban appeal webhook:
+  - Test ping button should return success or error code in admin logs.
+- Ticket area:
+  - Create ticket from UI, check channel created, check logs, close ticket, reopen ticket.
+
+MISC NOTES:
+- When any setting uses a server/channel/role id, always validate it exists before saving.
+- Trim user input for keys and usernames before validating but do not change case for case-sensitive elements.
+- Make all error messages clear and actionable for users and admins.
+
+Please implement these fixes now and post a summary of endpoints/files touched and deployed commits so I can test.

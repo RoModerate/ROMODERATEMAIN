@@ -1,0 +1,65 @@
+Marketplace Features & Extras
+
+Bundles & Packs: Let sellers group multiple digital assets into bundles—buyers save, sellers get more sales.
+
+Flash Sales & Timed Events: Trigger site-wide or user-specific sales (like “Pink Friday” specials), with countdown timers.
+
+Auction System: Sellers can choose fixed price OR auctions—bidders compete and highest bid wins at the deadline.
+
+Wishlist & Watchlist: Users can save favorite items or sellers, receive alerts when prices drop or new items are listed.
+
+Referral Rewards: Discord-based invite system; users get credits or perks when friends sign up and buy/sell.
+
+Badges for Trusted Sellers & Buyers: Earned after successful transactions, positive reviews, or moderation cooperation.
+
+Social Sharing Buttons: Instantly share marketplace listings via Discord, Twitter/X, or Instagram with one click (boosts traffic).
+
+Category Icons & Item Tags: Use cute pink icons for item categories, make searching visual; let sellers tag listings for easy filtering.
+
+Customizable Storefronts: Sellers design their own mini-profile/shop—backgrounds, logos, featured items, store chat (Discord-powered).
+
+Marketplace Blog or News: Announcements, tips, seller interviews, event recaps—all in the RoModerate vibe.
+
+Staff Picks & Weekly Highlights: Showcase top items in a pink-highlighted block, maybe with a “staff review” blurb.
+
+Motivational Microcopy: Add encouraging messages (“You’re crushing it!” “Pink power seller!”) in dashboards, notifications, etc.
+
+Dashboard/Community Engagement Additions
+
+Community Polls: Let users vote on new features, marketplace events, or icon styles.
+
+Profile Customization: Personal dashboards allow theme tweaks (pink variants, layouts, animated backgrounds).
+
+Discord Server Integration: Auto-sync Discord roles; maybe sell exclusive “market badges” for top buyers/sellers directly through Discord.
+
+Progress Tracker: Bar showing seller earnings, marketplace points, profile completion, etc.—help users set and reach goals.
+
+Marketplace Challenges: Special tasks (list X items, buy from Y sellers, leave Z reviews) for bonus credits/badges.
+
+Marketplace Level System: Gain XP for every transaction or activity; unlock perks, more store slots, or profile customizations.
+
+Safety, Support, & Trust Improvements
+
+24/7 Help Widget: Pink-themed live chat support—FAQ, bot and mod support, ticket escalation.
+
+Verified Payments: Show payment method badges on user profiles—build confidence.
+
+Enhanced Dispute Resolution: Add step-by-step guides and direct Discord appeals/escalation buttons in the dashboard.
+
+Content Guidelines Page: Use fun icons and short blurbs to explain what’s allowed, what gets removed, and how to appeal.
+
+Safe Trading Tips: Pink info boxes with quick bullet points about avoiding scams, using escrow, and reporting issues.
+
+Fun & Seasonal Items
+
+Seasonal Themes: Swap out background colors, banners, icons for holidays or Discord community events—all pink-fied!
+
+Limited Edition Items: Sellers can opt to make listings “limited” with auto-countdown, buyer exclusivity.
+
+Community Art Collabs: Feature group-designed icons/badges, voted on by users.
+
+Extra Monetization & Growth
+
+Featured Listing Upgrades: Sellers pay (with marketplace credits or real $) to pin items in the top “featured” area, with pink VIP glow.
+
+Marketplace Sponsorships: Sponsored blocks by outside creators or Discord partners.

@@ -1,0 +1,71 @@
+Please review my entire dashboard, bot controls, panels, and all features—then fix anything that isn’t working, is buggy, or can be improved. Here’s a full list based on what I see and need:
+
+General Reliability:
+
+Make every dashboard area and command (including moderation and bot actions) work smoothly for people. No bugs, no downtime, easy for users.
+
+Go through each dashboard section and panel—if anything is slow or unreliable, fix it so everything runs 24/7, even offline if possible.
+
+Make sure all functionalities connect and respond (no buttons doing nothing, all links and logins work).
+
+Specific Fixes Needed:
+
+Ticket Panel: This isn’t working—please troubleshoot it and make it fully functional. It should let users open, manage, and close tickets with no issues.
+
+Bot Token/Step 4 Panel: The bot doesn’t go online or connect—please fix this so it always starts up and comes online, even after a crash or reboot.
+
+Moderation Panel: Improve it so all moderation commands and actions (ban, mute, etc.) run reliably and give user feedback.
+
+Duplicate Areas: Check for any duplicate panels, buttons, or menu items—remove or merge to keep things clean.
+
+Confirm every link is correct and removes unused/old ones, especially Discord URLs or callback links.
+
+Fix any errors about invalid OAuth2 or missing code/state.
+
+Security and Setup:
+
+Move all secrets out of plain .env files to Replit Secrets and document which secrets are needed, like Discord bot token, client secret, session secret, etc.
+
+If Replit’s domain or redirect URL changes, make it auto-updates everywhere, especially Discord login and invite URLs.
+
+The bot invite link should not include redirect_uri or response_type.
+
+Names and Navigation:
+
+Rename “Player Lookup” to something simple and general; ideas: “User Search”, “Account Finder”, or “Member Info”. Choose whichever sounds best or suggest another.
+
+Standardize all panel names and button texts for clarity—no typos or confusing terms.
+
+Ideas for New Features:
+
+Add a Setup/Admin tab that shows current bot/connect status, missing secrets, and copy buttons for necessary Discord URLs.
+
+Add a permissions calculator/GUI to set bot permissions without mistakes.
+
+Add an in-app “Health Check” for secrets, redirect, panel readiness—shows pass/fail for each.
+
+Help/Docs sidebar: Show quick help and troubleshooting, not just an external file.
+
+Audit log for any settings changes (no secrets, just what changed and when).
+
+Add buttons for “Open Login Flow” and “Bot Invite”—opens a new tab to check the correct link live.
+
+User Experience:
+
+Add friendly error screens if logins or commands fail, telling users what to do next.
+
+Every dashboard page should say if something’s missing or not ready, showing clear steps to fix it.
+
+Make sure loading states, feedback messages, and instructions are clear for new users.
+
+Cleanup Tasks:
+
+Remove any root-level REDIRECT_URI config file (use one source of truth, preferably auto-generated).
+
+Keep only .env.template (no real secrets committed).
+
+Remove hardcoded or broken links.
+
+Make all changes to logs and error reports clear and safe (no secret leakage).
+
+Please go through everything above and confirm fixes for each, and let me know if anything’s missing or can be improved further!

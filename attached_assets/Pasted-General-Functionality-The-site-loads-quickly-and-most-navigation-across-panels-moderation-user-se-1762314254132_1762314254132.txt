@@ -1,0 +1,49 @@
+General Functionality
+The site loads quickly and most navigation across panels (moderation, user search, bans, support tickets, etc.) works without major delays.
+
+The Help & FAQ page displays all the basic tabs and getting started guides. The layout is understandable.
+
+Moderation & User Search
+Moderation Panel, Bans, Appeals, and tickets are present and clickable.
+
+User Search sometimes fails with “Failed to search player. Please try again”—error handling needs improvement and clearer messaging for users.
+
+Devs should be able to share ban logs (as you suggested): showing the game, username, and ban date in the user search log if enabled by the owner would be a valuable feature.
+
+Configuration & Setup
+Bot Commands and Help/FAQ are easy to find.
+
+Server Settings, Game Profile, Category/Channel assignments are visible but the link between channels and categories isn’t clear during ticket panel setup.
+
+Major problem: When you try to use Create Ticket Panel and submit, sometimes nothing happens — this must be fixed. Make sure channels/categories are connected and submitting creates a visible panel in the selected spot.
+
+Branding & Profile
+The Game Profile & Branding sections need more polish—branding tools should be easy to access with obvious options for customization, images, descriptions, and links.
+
+Suggestions & Improvements
+Go through all the moderation/configuration screens and trigger each feature in different scenarios to check for edge cases and error messages.
+
+Improve error handling in user search, ticketing, and database-dependent sections. Always give users a clear message and helpful next actions.
+
+For ticket setup, after selecting a category, show a confirmation that the ticket panel/channel is created. Add progress indicators or confirmation modals.
+
+Add an overview page showing system status, error logs, and health stats (so admins catch problems quickly).
+
+Make developer features like ban-sharing toggleable in settings, with privacy explanations.
+
+Consider adding tooltips or help bubbles beside tricky features.
+
+Fix the DATABASE_URL/environment variable prompt and test relogin flows so user sessions are preserved after updates.
+
+Final Thoughts
+The core idea and architecture are right—moderation, user search, bans, tickets, support, and config all in one place.
+
+Major priorities:
+
+Patch up database issues and error handling.
+
+Make user-facing panels reliable with visible success on submits.
+
+Fine-tune Game Profile & Branding options.
+
+Deliver clear messages and make setup/confirmation feel smooth.

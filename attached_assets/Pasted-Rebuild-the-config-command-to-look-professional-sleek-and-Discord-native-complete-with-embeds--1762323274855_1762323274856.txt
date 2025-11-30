@@ -1,0 +1,177 @@
+Rebuild the /config command to look professional, sleek, and Discord-native — complete with embeds, watermark styling, select menus, and proper database syncing with the web dashboard.
+
+🧩 CONFIG COMMAND OVERVIEW
+
+Command: /config
+Purpose: The central hub for all bot and server setup configuration.
+
+🖌️ Design Guidelines
+
+Use Discord-style embeds with a professional watermark and clean layout.
+
+Use subtle emojis and dividers like:
+
+> 🛠️ | Configuration Panel
+> 💾 | Status: Not Set
+> 🌐 | Link Key Required
+
+
+Footer example: RoModerate • Powered by Discord
+
+Color theme: Discord blue / blurple gradient (#5865F2)
+
+🔑 LINK SYSTEM
+
+Before using /config, users must link their server via the web dashboard.
+
+On the website, under Server Settings, generate a Link Key using /linkkey.
+
+Enter that key inside Discord using:
+
+/linkkey <key>
+
+
+Once verified, /config will unlock and load their saved server data from the database.
+
+If the server is not linked, /config should show an embed:
+
+> ⚠️ | This server is not linked.
+> Please visit your dashboard and generate a Link Key first.
+> Once done, run /linkkey <key> to connect this server.
+
+⚙️ CONFIG MENU STRUCTURE
+
+Once linked, /config opens a professional embed:
+
+🛠️ RoModerate Configuration Panel
+> Select a category below to begin setup.
+> All settings automatically sync between web and bot.
+
+💾 Status: Synced with Web Dashboard
+🔗 Server ID: 1234567890
+
+
+Embed includes a dropdown menu for all categories:
+
+Reports Settings
+
+Appeals Settings
+
+Moderation Logs
+
+Tickets & Support
+
+Roblox / Game Data
+
+Server Settings
+
+Each dropdown selection opens a new embed with all settings for that category (e.g., channels, roles, toggles).
+
+Each setting should:
+
+Show current status (✅ Set / ❌ Not Set)
+
+Have buttons for “Set Channel”, “Set Role”, “Toggle”, “Edit”, etc.
+
+Save updates directly to the database, reflecting on both the bot and website instantly.
+
+🧱 DATABASE SYNC LOGIC
+
+When a setting is changed from Discord:
+
+Update the server’s database record
+
+Auto-sync with the web dashboard
+
+Show a “✅ Saved successfully!” message briefly
+
+Example structure in DB:
+
+{
+  "serverId": "1234567890",
+  "linked": true,
+  "reports": {
+    "channel": "1212121212",
+    "pingRole": "1313131313",
+    "banStrings": true,
+    "logs": "1414141414"
+  },
+  "appeals": {
+    "category": "1515151515",
+    "logs": "1616161616",
+    "deniedRole": "1717171717"
+  }
+}
+
+💬 EXAMPLE EMBED (Reports Settings)
+🧾 Reports Settings
+> Configure all report-related actions for your moderation system.
+
+📢 New Reports Channel: Not Set
+🎯 Ping Role: Not Set
+🧩 Pre-generated Ban Strings: Disabled
+🕒 Estimated Time: Not Set
+🗂️ Report Logs: Not Set
+♾️ Allow Infinite Reports: Disabled
+
+Use the buttons below to set each option.
+
+
+Buttons:
+
+📝 Set Channel
+
+🔔 Set Role
+
+🔄 Toggle Ban Strings
+
+⏰ Set Time
+
+💾 Save Changes
+
+🌐 WEB ↔ DISCORD SYNC
+
+All configurations must mirror between:
+
+Website Dashboard (Server Settings, Reports Settings, Appeals Settings, etc.)
+
+Discord Bot /config Command
+
+Users can choose to configure via:
+
+Web Dashboard
+or
+
+Directly inside Discord using /config
+
+Both methods update the same database entry.
+
+🧠 EXTRA FIXES
+
+Fix “Failed to search player. Please try again.” in /user-search.
+
+Fix “Create Panel” button (currently does nothing).
+
+Set up proper DATABASE_URL connection (Replit Secrets).
+
+Prevent auto logout when refreshing the web dashboard.
+
+Make sure all database entries sync correctly across sessions.
+
+🛍️ MESSAGE TO SCORCH (for Marketplace UI)
+
+Hey Scorch, please tell Replit AI to remove the countdown UI from the Marketplace section — I need to start working on it manually now.
+
+✅ Summary
+
+Build Goals:
+
+1 unified /config command with dropdown embeds and Discord-style design
+
+Full link system using /linkkey
+
+Database sync between bot and website
+
+Professional interface with watermark and “Not Set” indicators
+
+Smooth, modern UX for both developers and staff

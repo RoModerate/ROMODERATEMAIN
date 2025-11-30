@@ -1,0 +1,13 @@
+ChatGPT said:
+
+For the Discord Bot Configuration, the bot doesn’t go online after setup. At that step, there needs to be a clear Step 3 that shows developers what they must enable — like Presence Intent, Server Members Intent, and Message Content Intent — before continuing. For Channel Configuration, instead of manually copying and pasting channel IDs, when I select my Discord server, it should automatically show a list of all available channels to choose from.
+
+For the “Setup Complete!” step, the Bot Key doesn’t display anything. Fix that so the Bot Key shows up correctly, and also allow developers to reset their Bot Key in the Server Settings (only for the owner or developer). In the Team Members area, when I create an invitation and send it to someone, clicking the link currently gives a “404 Page Not Found — Did you forget to add the page to the router?” error. Please fix that so invitation links work properly.
+
+In the Moderation Panel, the /reports page only shows a gray screen and nothing loads — that needs to be fixed so all reports appear correctly. For Player Lookup, when entering a Roblox username, the user’s icon doesn’t appear and instead just shows a purple placeholder — make it display the actual Roblox user’s profile icon. For the Ticket Category setup, it should use the actual Discord server’s channel categories; the developer must be able to select the correct category or folder directly from the server list. The entire Ticket System needs to be reworked around that.
+
+In all areas that display the server name, also include the server’s icon so users can easily identify which server they’re managing. For the Discord Webhook URL in configuration, it keeps disappearing every time the page is refreshed — fix it so it saves properly and persists. Finally, when I log in and click my profile icon, there should be a “Moderator Portal” button inside the dropdown menu, so invited moderators can access their moderation panel easily once logged in.
+Select redirect URL
+https://ce8355b7-f3e5-4ce9-8e91-cfe544378ef2-00-3uq40ejwlr7vp.worf.replit.dev/api/auth/discord/callback
+Generated URL
+https://discord.com/oauth2/authorize?client_id=1402908543488626729&response_type=code&redirect_uri=https%3A%2F%2Fce8355b7-f3e5-4ce9-8e91-cfe544378ef2-00-3uq40ejwlr7vp.worf.replit.dev%2Fapi%2Fauth%2Fdiscord%2Fcallback&scope=identify+guilds
